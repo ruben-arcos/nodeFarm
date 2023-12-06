@@ -4,6 +4,8 @@
 const fs = require("fs");
 const http = require('http')
 
+//////////////////////////////////////////////////////////////////////////////////////////////////// FILES
+
 // Blocking synchronous way excercise
 
 // Read the contents of the file "input.txt" synchronously.
@@ -37,3 +39,12 @@ const http = require('http')
 // });
 // // will be logged in first
 // console.log("Will read file!!");
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////// SERVER
+
+// each time that a new request hits our server, this callback function here will get called,
+// the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.
+http.createServer((req, res) => {
+    res.end('Hello from the server!')
+})
