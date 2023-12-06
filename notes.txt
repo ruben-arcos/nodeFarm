@@ -47,3 +47,5 @@ Example:
         })
 
 SOLUTION: Using promises or Async/Await
+
+Local host has this address as default -----> 127.0.0.1

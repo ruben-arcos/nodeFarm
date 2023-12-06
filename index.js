@@ -45,6 +45,12 @@ const http = require('http')
 
 // each time that a new request hits our server, this callback function here will get called,
 // the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     res.end('Hello from the server!')
+})
+
+// This will start to listen for incoming requests from the local host IP and then on port 8000
+// The the callback function is optional 
+server.listen(8000, '127.0.0.1', () => {
+    console.log('Listening to requests on port 8000')
 })
