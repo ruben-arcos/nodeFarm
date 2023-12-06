@@ -42,6 +42,12 @@ const url = require("url");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////// SERVER
 
+// __dirname is where the current file is located
+// Top level code is only executed once
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+// data will then parse into an object
+const dataObject = JSON.parse(data);
+
 // each time that a new request hits our server, this callback function here will get called,
 // the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.
 const server = http.createServer((req, res) => {
@@ -51,14 +57,17 @@ const server = http.createServer((req, res) => {
     res.end("This is the OVERVIEW");
   } else if (pathName === "/product") {
     res.end("This is the PRODUCT");
+  } else if (pathName === "/api") {
+    res.writeHead(200, { "Content-type": "application/json" });
+    res.end(data)
   } else {
     // status code
     res.writeHead(404, {
-        // make sure to always hypen or camel case the 
+      // make sure to always hypen or camel case the keys
       "Content-type": "text/html",
-      'my-own-header': "hello-world"
+      "my-own-header": "hello-world",
     });
-     // status code always need to be set before we send out the response 
+    // status code always need to be set before we send out the response
     res.end("<h1>Page not found!</h1>");
   }
 });
