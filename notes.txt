@@ -1,4 +1,4 @@
-Synchronous vs. Asynchronous
+// Synchronous vs. Asynchronous
 
 Synchronous === blocking 👎🏼
     Synchronous programming ensures that each statement is executed in a sequential order, and the program waits for each operation to complete before moving on to the next one.
@@ -48,4 +48,16 @@ Example:
 
 SOLUTION: Using promises or Async/Await
 
+// Server
+
 Local host has this address as default -----> 127.0.0.1
+
+
+// Routing
+
+Routing means implementing different actions for different URLs
+
+
+*** use command D to select words and edit them at the same time
+
+What is an HTTP header? A piece of information about the response that we are sending back 

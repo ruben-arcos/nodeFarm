@@ -2,8 +2,8 @@
 
 // Import the 'fs' (file system) module to work with files.
 const fs = require("fs");
-const http = require('http')
-
+const http = require("http");
+const url = require("url");
 //////////////////////////////////////////////////////////////////////////////////////////////////// FILES
 
 // Blocking synchronous way excercise
@@ -40,17 +40,31 @@ const http = require('http')
 // // will be logged in first
 // console.log("Will read file!!");
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////// SERVER
 
 // each time that a new request hits our server, this callback function here will get called,
 // the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.
 const server = http.createServer((req, res) => {
-    res.end('Hello from the server!')
-})
+  const pathName = req.url;
+
+  if (pathName === "/" || pathName === "/overview") {
+    res.end("This is the OVERVIEW");
+  } else if (pathName === "/product") {
+    res.end("This is the PRODUCT");
+  } else {
+    // status code
+    res.writeHead(404, {
+        // make sure to always hypen or camel case the 
+      "Content-type": "text/html",
+      'my-own-header': "hello-world"
+    });
+     // status code always need to be set before we send out the response 
+    res.end("<h1>Page not found!</h1>");
+  }
+});
 
 // This will start to listen for incoming requests from the local host IP and then on port 8000
-// The the callback function is optional 
-server.listen(8000, '127.0.0.1', () => {
-    console.log('Listening to requests on port 8000')
-})
+// The callback function is optional
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening to requests on port 8000");
+});
