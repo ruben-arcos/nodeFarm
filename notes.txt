@@ -1,0 +1,49 @@
+Synchronous vs. Asynchronous
+
+Synchronous === blocking 👎🏼
+    Synchronous programming ensures that each statement is executed in a sequential order, and the program waits for each operation to complete before moving on to the next one.
+
+Example:
+
+    const fs = require('fs');
+
+    // Blocking code execution
+    const input = fs.readFileSync('input.txt', 'utf-8');
+    console.log(input)
+
+Asynchronous === non-blocking 👍🏼
+    Asynchronous programming allows certain operations to run independently in the background, enabling the program to continue executing other tasks without waiting for these asynchronous operations to complete. Asynchronous functions are often used for non-blocking tasks like handling I/O operations, timers, or events.
+
+            *** I/O, which stands for Input/Output, refers to the interaction between a computer program and the outside world. I/O operations involve     reading from or writing to external sources, such as files, databases, network connections, or user input devices. 
+
+Example:
+
+    const fs = require('fs');
+
+    // Non-blocking code execution
+    const input = fs.readFile('input.txt', 'utf-8', (err, data) => {
+        console.log(data);
+    });
+    console.log('Reading file...');
+
+
+Node.js is single thread, for each app there is only one thread
+
+Potential problem: CALLBACK HELL
+
+Example: 
+
+        const fs = require('fs');
+
+        fs.readFile('start.txt', 'utf-8', (err, data1) => {
+            fs.readFile(`${data1}.txt`, 'utf-8', (err, data2) => {
+                fs.readFile('append.txt', 'utf-8', (err, data3) => {
+                    fs.writeFile('final.txt', `${data2} ${data3}`, 'utf-8', (err) => {
+                        if (err) throw err;
+                        console.log('Your file has been saved :D');
+                    })
+                })
+            })
+        })
+
+SOLUTION: Using promises or Async/Await
