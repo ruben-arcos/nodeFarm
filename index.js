@@ -43,7 +43,13 @@ const url = require("url");
 //////////////////////////////////////////////////////////////////////////////////////////////////// SERVER
 
 // __dirname is where the current file is located
-// Top level code is only executed once
+// Top level code is only executed once, sync will only work since it will not be blocked
+// Make sure to include the file extension
+const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`, "utf-8");
+
+const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`, "utf-8");
+const tempProduct= fs.readFileSync(`${__dirname}/templates/template-product.html`, "utf-8");
+
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 // data will then parse into an object
 const dataObject = JSON.parse(data);
@@ -53,13 +59,21 @@ const dataObject = JSON.parse(data);
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
+  // Overwiew page
   if (pathName === "/" || pathName === "/overview") {
-    res.end("This is the OVERVIEW");
+    res.writeHead(200, { "Content-type": "text/html" });
+    res.end(tempOverview);
+
+    // Product page
   } else if (pathName === "/product") {
     res.end("This is the PRODUCT");
+
+    // API
   } else if (pathName === "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(data);
+
+    // Not found
   } else {
     // status code
     res.writeHead(404, {
