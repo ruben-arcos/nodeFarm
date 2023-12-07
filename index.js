@@ -75,27 +75,33 @@ const tempProduct = fs.readFileSync(
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 // data will then parse into an object
-const dataObject = JSON.parse(data);
+const dataObj = JSON.parse(data);
 
 // each time that a new request hits our server, this callback function here will get called,
 // the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
+  const { query, pathname } = url.parse(req.url, true);
 
   // Overwiew page
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, { "Content-type": "text/html" });
-    
-    const cardsHtml = dataObject.map((el) => replaceTemplate(tempCard, el)).join('');
-    const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml)
+
+    const cardsHtml = dataObj
+      .map((el) => replaceTemplate(tempCard, el))
+      .join("");
+    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
     res.end(output);
 
     // Product page
-  } else if (pathName === "/product") {
-    res.end("This is the PRODUCT");
+  } else if (pathname === "/product") {
+    res.writeHead(200, { "Content-type": "text/html" });
+    // Here we retrieve an element based on a query string
+    const product = dataObj[query.id];
+    const output = replaceTemplate(tempProduct, product);
+    res.end(output);
 
     // API
-  } else if (pathName === "/api") {
+  } else if (pathname === "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(data);
 
