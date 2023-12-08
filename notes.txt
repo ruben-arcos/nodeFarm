@@ -71,3 +71,32 @@ JSON is a very simple text format that looks a lot like JavaScript. We have one 
 when we send JSON, we need to say application/json, and for HTML, it's text/html,
 
 *** In Node.js every file is treated as a module
+
+
+/// NPM
+
+whenever we start a new project,
+
+is to start with npm init.
+
+So we use npm as the command and then init.
+
+And this will basically create a package.jason file.
+
+Which is kind of a configuration file of our project
+
+where all kinds of data about the project is stored.
+
+Answer the questions asked
+    1. package name: ex. node-farm
+            - use url friendly name hence the use of hyphen
+    2. version: press return
+    3. description: Learning node.js
+    4. entry point: hit return
+    5. test command: press return
+    6. git respository: press return
+    7. kywords: press return
+    8. author: my name
+    9. license: press return
+    
+    Is this ok? press return
