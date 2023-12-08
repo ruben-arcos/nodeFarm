@@ -145,3 +145,9 @@ development dependencies
    ** You can also install them in both places, but global dependencies are usually always development tools makes because they are the ones who make more sense to install like that, again because they usually provide us like a nice command line interface program.
 
 
+// SLUGIFY 
+
+what is a slug?
+    slug is just the last part of a URL that contains a unique string that identifies the resource that the website is displaying.
+
+    ex. nodefarm.com/product/fresh-avocados instead of nodefarm.com/product?id=0
