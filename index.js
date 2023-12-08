@@ -7,10 +7,10 @@ const http = require("http");
 const url = require("url");
 
 // second third party modules
-const slugify = require('slugify')
+const slugify = require("slugify");
 
 // third my modules
-const replaceTemplate = require('./modules/replaceTemplate')
+const replaceTemplate = require("./modules/replaceTemplate");
 //////////////////////////////////////////////////////////////////////////////////////////////////// FILES
 
 // Blocking synchronous way excercise
@@ -52,17 +52,26 @@ const replaceTemplate = require('./modules/replaceTemplate')
 // __dirname is where the current file is located
 // Top level code is only executed once, sync will only work since it will not be blocked
 // Make sure to include the file extension
-const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`, "utf-8");
-const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`, "utf-8");
-const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.html`, "utf-8");
+const tempOverview = fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  "utf-8"
+);
+const tempCard = fs.readFileSync(
+  `${__dirname}/templates/template-card.html`,
+  "utf-8"
+);
+const tempProduct = fs.readFileSync(
+  `${__dirname}/templates/template-product.html`,
+  "utf-8"
+);
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 // data will then parse into an object
 const dataObj = JSON.parse(data);
 
-// here we include third party module
-const slugs = dataObj.map(el => slugify(el.productName, { lower: true }))
-console.log(slugs)
+const slugs = dataObj.map((el) => slugify(el.productName, { lower: true }));
+
+console.log(slugs);
 
 // each time that a new request hits our server, this callback function here will get called,
 // the callback function will have access to the request object which holds all kinds of stuff like the request url, and a bunch of other stuff.

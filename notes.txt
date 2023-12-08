@@ -151,3 +151,25 @@ what is a slug?
     slug is just the last part of a URL that contains a unique string that identifies the resource that the website is displaying.
 
     ex. nodefarm.com/product/fresh-avocados instead of nodefarm.com/product?id=0
+
+// 21. PACKAGE VERSIONING AND UPDATING
+
+What does the numbers mean in this  "nodemon": "^3.0.2"?
+
+3
+0
+2
+
+Symbols:
+
+    ^ = we accept all the patch and all the minor releases
+    ~ = only accept patch releases -- a bit safer for bug fixes
+    * = accepts all changes. not recommended
+
+
+*** TO UNINSTALL A PACKAGE: ex. npm uninstall express
+
+
+*** TO GET BACK the node_modules folder simply TYPE: npm install
+
+*** ALWAYS SHARE package-lock.json and package.json
