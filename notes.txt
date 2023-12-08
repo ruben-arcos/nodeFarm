@@ -69,3 +69,5 @@ What is an API? A service from which we can request some data
 JSON is a very simple text format that looks a lot like JavaScript. We have one big array which contains objects, then each object has the ID, product name, image, and so forth
 
 when we send JSON, we need to say application/json, and for HTML, it's text/html,
+
+*** In Node.js every file is treated as a module
