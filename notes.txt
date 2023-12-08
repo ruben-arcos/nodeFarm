@@ -100,3 +100,48 @@ Answer the questions asked
     9. license: press return
     
     Is this ok? press return
+
+What the two types of dependencies are:
+
+    1. simple dependencies 
+            simple, or regular dependencies, are simply packages hat contain some code that we will include in our own code. So code upon which we built our own application, and that's why we actually call them dependencies,because our project and our code depend on them to work correctly
+
+    2. development dependencies
+            these are usually just tools for development. For example like a code bundler like Webpack, or a debugger tool or a testing library and primarily used to develop our apps
+
+// HOW TO INSTALL DEPENDENCIES:
+
+simple dependencies
+    TYPE: npm install + name of package can also use npm i instead
+    ex. nmp install slugify
+
+development dependencies
+    TYPE: npm install + dependency
+    ex. npm install nodemon --save-dev
+    and so this will then add an entry package.json in the dev dependencies
+
+// Nodemon will restart server each time there is a change
+
+// TWO TYPES OF DEPENDENCIES INSTALLATION
+
+    1. locally - only works in this project, we can see node_module folder was created which the files contained in there are dependencies of our dependencies
+
+    npm install nodemon --save-dev
+
+    ex. if nodemon isn't installed globally, you need to specify an npm script on the package.json file
+
+        "scripts": {
+        "start": "nodemon index.js"
+         },
+
+         to start using it TYPE: npm start
+
+    2. globally - available everywhere not just our project folder, but in every folder across your entire machine. So a package should be installed globally. Nodemon is a tool that can be installed globally
+
+   TYPE: nmp i nodemon --global
+
+   on a mac use: sudo npm i nodemon --global, then password
+
+   ** You can also install them in both places, but global dependencies are usually always development tools makes because they are the ones who make more sense to install like that, again because they usually provide us like a nice command line interface program.
+
+
