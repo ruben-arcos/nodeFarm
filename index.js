@@ -2,15 +2,16 @@
 
 // Import the 'fs' (file system) module to work with files
 // first core modules
-const fs = require("fs");
-const http = require("http");
-const url = require("url");
+const fs = require('fs');
+const http = require('http');
+const url = require('url');
 
 // second third party modules
-const slugify = require("slugify");
+const slugify = require('slugify');
 
 // third my modules
-const replaceTemplate = require("./modules/replaceTemplate");
+const replaceTemplate = require('./modules/replaceTemplate');
+const { toUnicode } = require('punycode');
 //////////////////////////////////////////////////////////////////////////////////////////////////// FILES
 
 // Blocking synchronous way excercise
@@ -54,18 +55,18 @@ const replaceTemplate = require("./modules/replaceTemplate");
 // Make sure to include the file extension
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
-  "utf-8"
+  'utf-8'
 );
 const tempCard = fs.readFileSync(
   `${__dirname}/templates/template-card.html`,
-  "utf-8"
+  'utf-8'
 );
 const tempProduct = fs.readFileSync(
   `${__dirname}/templates/template-product.html`,
-  "utf-8"
+  'utf-8'
 );
 
-const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 // data will then parse into an object
 const dataObj = JSON.parse(data);
 
@@ -79,26 +80,26 @@ const server = http.createServer((req, res) => {
   const { query, pathname } = url.parse(req.url, true);
 
   // Overwiew page
-  if (pathname === "/" || pathname === "/overview") {
-    res.writeHead(200, { "Content-type": "text/html" });
+  if (pathname === '/' || pathname === '/overview') {
+    res.writeHead(200, { 'Content-type': 'text/html' });
 
     const cardsHtml = dataObj
       .map((el) => replaceTemplate(tempCard, el))
-      .join("");
-    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
+      .join('');
+    const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
     res.end(output);
 
     // Product page
-  } else if (pathname === "/product") {
-    res.writeHead(200, { "Content-type": "text/html" });
+  } else if (pathname === '/product') {
+    res.writeHead(200, { 'Content-type': 'text/html' });
     // Here we retrieve an element based on a query string
     const product = dataObj[query.id];
     const output = replaceTemplate(tempProduct, product);
     res.end(output);
 
     // API
-  } else if (pathname === "/api") {
-    res.writeHead(200, { "Content-type": "application/json" });
+  } else if (pathname === '/api') {
+    res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
 
     // Not found
@@ -106,16 +107,16 @@ const server = http.createServer((req, res) => {
     // status code
     res.writeHead(404, {
       // make sure to always hypen or camel case the keys
-      "Content-type": "text/html",
-      "my-own-header": "hello-world",
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
     });
     // status code always need to be set before we send out the response
-    res.end("<h1>Page not found!</h1>");
+    res.end('<h1>Page not found!</h1>');
   }
 });
 
 // This will start to listen for incoming requests from the local host IP and then on port 8000
 // The callback function is optional
-server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening to requests on port 8000");
+server.listen(8000, '127.0.0.1', () => {
+  console.log('Listening to requests on port 8000');
 });
